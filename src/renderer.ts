@@ -21,7 +21,8 @@ ipcRenderer.on("file-selected", (_, filePath) => {
 
     const parsedReport = parseReport(data);
 
-    fs.writeFileSync("output.json", JSON.stringify(parsedReport));
+    // comment this back in to troubleshoot parsed report
+    // fs.writeFileSync("output.json", JSON.stringify(parsedReport));
 
     await writeCsv({
       parsedReport,
