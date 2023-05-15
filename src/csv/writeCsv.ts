@@ -18,14 +18,15 @@ export async function writeCsv({
 
   const rows = format.toRows(parsedReport);
 
-  const csvWriter = createCsvWriter({
-    path: path.join(
-      outDir,
-      `${parsedReport.reportDate.toLocaleDateString().replace(/\//g, "-")}_${
-        format.label
-      }.csv`
-    ),
+  const outputPath = path.join(
+    outDir,
+    `${parsedReport.reportDate.toLocaleDateString().replace(/\//g, "-")}_${
+      format.label
+    }.csv`
+  );
 
+  const csvWriter = createCsvWriter({
+    path: outputPath,
     header: format.header,
   });
 

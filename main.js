@@ -13,6 +13,7 @@ var createWindow = () => {
     }
   });
   mainWindow.loadFile("index.html");
+  mainWindow.webContents.openDevTools();
 };
 import_electron.app.on("ready", createWindow);
 import_electron.app.on("window-all-closed", function() {

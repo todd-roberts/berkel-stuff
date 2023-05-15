@@ -1541,11 +1541,13 @@ async function writeCsv({
 }) {
   const outDir = import_path.default.dirname(filePath);
   const rows = format.toRows(parsedReport);
+  const outputPath = import_path.default.join(
+    outDir,
+    `${parsedReport.reportDate.toLocaleDateString().replace(/\//g, "-")}_${format.label}.csv`
+  );
+  console.log(outputPath);
   const csvWriter = (0, import_csv_writer.createObjectCsvWriter)({
-    path: import_path.default.join(
-      outDir,
-      `${parsedReport.reportDate.toLocaleDateString().replace(/\//g, "-")}_${format.label}.csv`
-    ),
+    path: outputPath,
     header: format.header
   });
   await csvWriter.writeRecords(rows);
