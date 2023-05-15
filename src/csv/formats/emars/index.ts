@@ -149,9 +149,11 @@ const toRowFringes = (
   const fringesObj: Record<string, unknown> = {};
 
   for (const column of fringeColumns) {
-    fringesObj[column.id] = fringeDetail.find(
+    const amount = fringeDetail.find(
       ({ description }) => description === column.id
     )?.amount;
+
+    fringesObj[column.id] = formatToNDecimalPlaces(amount, 3);
   }
 
   return fringesObj;

@@ -53,6 +53,8 @@ export const createFringeColumns = (parsedReport: ParsedReport): Header[] => {
     ...new Set(allFringes.map(({ description }) => description)),
   ];
 
+  uniqueDescriptions.sort();
+
   if (uniqueDescriptions.length > MAX_FRINGE_COLUMNS) {
     throw new Error(
       `There are ${

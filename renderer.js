@@ -788,6 +788,7 @@ var createFringeColumns = (parsedReport) => {
   const uniqueDescriptions = [
     ...new Set(allFringes.map(({ description }) => description))
   ];
+  uniqueDescriptions.sort();
   if (uniqueDescriptions.length > MAX_FRINGE_COLUMNS) {
     throw new Error(
       `There are ${uniqueDescriptions.length} unique fringe descriptions (e.g. "$30000").
@@ -1127,9 +1128,10 @@ var toRowFringes = ({ fringeDetail }, fringeColumns) => {
   var _a;
   const fringesObj = {};
   for (const column of fringeColumns) {
-    fringesObj[column.id] = (_a = fringeDetail.find(
+    const amount = (_a = fringeDetail.find(
       ({ description }) => description === column.id
     )) == null ? void 0 : _a.amount;
+    fringesObj[column.id] = formatToNDecimalPlaces(amount, 3);
   }
   return fringesObj;
 };
@@ -1377,7 +1379,6 @@ var parseTotalWages = ({
 // src/employeeCheck/index.ts
 var isEmployeeCheckStart = (line) => line.startsWith(" ** PAY CLASS");
 var parseEmployeeCheck = (lines) => {
-  console.log(lines);
   const { payClass, payRate } = parsePayClassAndRate(lines);
   const employee = parseEmployee({
     allLines: lines,
