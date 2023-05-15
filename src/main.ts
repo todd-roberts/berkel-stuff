@@ -15,7 +15,7 @@ const createWindow = () => {
   mainWindow.loadFile("index.html");
 
   // Open the DevTools. (optional)
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 app.on("ready", createWindow);
